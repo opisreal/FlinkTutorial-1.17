@@ -1,13 +1,11 @@
-package com.atguigu.aggreagte;
+package com.atguigu.aggregate;
 
 import com.atguigu.bean.WaterSensor;
-import org.apache.flink.api.common.functions.FlatMapFunction;
 import org.apache.flink.api.java.functions.KeySelector;
 import org.apache.flink.streaming.api.datastream.DataStreamSource;
 import org.apache.flink.streaming.api.datastream.KeyedStream;
 import org.apache.flink.streaming.api.datastream.SingleOutputStreamOperator;
 import org.apache.flink.streaming.api.environment.StreamExecutionEnvironment;
-import org.apache.flink.util.Collector;
 
 /**
  * TODO
@@ -15,10 +13,10 @@ import org.apache.flink.util.Collector;
  * @author cjp
  * @version 1.0
  */
-public class KeybyDemo {
+public class SimpleAggregateDemo {
     public static void main(String[] args) throws Exception {
         StreamExecutionEnvironment env = StreamExecutionEnvironment.getExecutionEnvironment();
-        env.setParallelism(2);
+        env.setParallelism(1);
 
 
         DataStreamSource<WaterSensor> sensorDS = env.fromElements(
@@ -28,16 +26,9 @@ public class KeybyDemo {
                 new WaterSensor("s3", 3L, 3)
         );
 
-        // 按照 id 分组
-        /**
-         * TODO keyby： 按照id分组
-         * 要点：
-         *  1、返回的是 一个 KeyedStream，键控流
-         *  2、keyby不是 转换算子， 只是对数据进行重分区, 不能设置并行度
-         *  3、分组 与 分区 的关系：
-         *    1） keyby是对数据分组，保证 相同key的数据 在同一个分区（子任务）
-         *    2） 分区： 一个子任务可以理解为一个分区，一个分区（子任务）中可以存在多个分组（key）
-         */
+
+
+
         KeyedStream<WaterSensor, String> sensorKS = sensorDS
                 .keyBy(new KeySelector<WaterSensor, String>() {
                     @Override
@@ -46,7 +37,27 @@ public class KeybyDemo {
                     }
                 });
 
-        sensorKS.print();
+        /**
+         * TODO 简单聚合算子
+         *  1、 keyby之后才能调用
+         *  2、 分组内的聚合：对同一个key的数据进行聚合
+         */
+        // 传位置索引的，适用于 Tuple类型，POJO不行
+//        SingleOutputStreamOperator<WaterSensor> result = sensorKS.sum(2);
+//        SingleOutputStreamOperator<WaterSensor> result = sensorKS.sum("vc");
+
+
+        /**
+         *   max\maxby的区别： 同min
+         *       max：只会取比较字段的最大值，非比较字段保留第一次的值
+         *       maxby：取比较字段的最大值，同时非比较字段 取 最大值这条数据的值
+         */
+//        SingleOutputStreamOperator<WaterSensor> result = sensorKS.max("vc");
+//        SingleOutputStreamOperator<WaterSensor> result = sensorKS.min("vc");
+        SingleOutputStreamOperator<WaterSensor> result = sensorKS.maxBy("vc");
+//        SingleOutputStreamOperator<WaterSensor> result = sensorKS.minby("vc");
+
+        result.print();
 
 
         env.execute();

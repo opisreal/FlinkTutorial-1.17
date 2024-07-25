@@ -1,4 +1,4 @@
-package com.atguigu.aggreagte;
+package com.atguigu.aggregate;
 
 import com.atguigu.bean.WaterSensor;
 import org.apache.flink.api.common.functions.ReduceFunction;

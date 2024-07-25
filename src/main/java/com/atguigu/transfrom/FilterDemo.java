@@ -28,14 +28,14 @@ public class FilterDemo {
         );
 
         // TODO filter： true保留，false过滤掉
-//        SingleOutputStreamOperator<WaterSensor> filter = sensorDS.filter(new FilterFunction<WaterSensor>() {
-//            @Override
-//            public boolean filter(WaterSensor value) throws Exception {
-//                return "s1".equals(value.getId());
-//            }
-//        });
+        SingleOutputStreamOperator<WaterSensor> filter = sensorDS.filter(new FilterFunction<WaterSensor>() {
+            @Override
+            public boolean filter(WaterSensor value) throws Exception {
+                return "s1".equals(value.getId());
+            }
+        });
 
-        SingleOutputStreamOperator<WaterSensor> filter = sensorDS.filter(new FilterFunctionImpl("s1"));
+//        SingleOutputStreamOperator<WaterSensor> filter = sensorDS.filter(new FilterFunctionImpl("s1"));
 
 
         filter.print();
