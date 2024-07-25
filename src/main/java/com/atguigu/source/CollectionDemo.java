@@ -11,9 +11,9 @@ import java.util.Arrays;
  * @author cjp
  * @version 1.0
  */
+
 public class CollectionDemo {
     public static void main(String[] args) throws Exception {
-
         StreamExecutionEnvironment env = StreamExecutionEnvironment.getExecutionEnvironment();
 
         // TODO 从集合读取数据

@@ -29,7 +29,7 @@ public class WordCountStreamUnboundedDemo {
         env.setParallelism(3);
 
         // TODO 2. 读取数据： socket
-        DataStreamSource<String> socketDS = env.socketTextStream("hadoop102", 7777);
+        DataStreamSource<String> socketDS = env.socketTextStream("centos701", 9999);
 
         // TODO 3. 处理数据: 切换、转换、分组、聚合
         SingleOutputStreamOperator<Tuple2<String, Integer>> sum = socketDS
