@@ -19,7 +19,7 @@ public class PartitionCustomDemo {
         DataStreamSource<String> socketDS = env.socketTextStream("hadoop102", 7777);
 
         socketDS
-                .partitionCustom(new MyPartitioner(), r->r)
+                .partitionCustom(new MyPartitioner(), value -> value)
                 .print();
 
 

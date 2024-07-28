@@ -49,7 +49,7 @@ public class SinkKafka {
                 // 如果是精准一次，必须设置 事务的前缀
                 .setTransactionalIdPrefix("atguigu-")
                 // 如果是精准一次，必须设置 事务超时时间: 大于checkpoint间隔，小于 max 15分钟
-                .setProperty(ProducerConfig.TRANSACTION_TIMEOUT_CONFIG, 10*60*1000+"")
+                .setProperty(ProducerConfig.TRANSACTION_TIMEOUT_CONFIG, 10 * 60 * 1000 + "")
                 .build();
 
 

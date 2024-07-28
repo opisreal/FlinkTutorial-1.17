@@ -24,7 +24,7 @@ public class WindowReduceDemo {
 
 
         SingleOutputStreamOperator<WaterSensor> sensorDS = env
-                .socketTextStream("hadoop102", 7777)
+                .socketTextStream("centos701", 7777)
                 .map(new WaterSensorMapFunction());
 
 
@@ -50,7 +50,7 @@ public class WindowReduceDemo {
                 }
         );
 
-        reduce.print();
+        reduce.print("窗口时间到了");
 
 
         env.execute();

@@ -78,7 +78,7 @@ public class WindowProcessDemo {
 
                                 long count = elements.spliterator().estimateSize();
 
-                                out.collect("key=" + s + "的窗口[" + windowStart + "," + windowEnd + ")包含" + count + "条数据===>" + elements.toString());
+                                out.collect("key=" + s + "的窗口[" + windowStart + "," + windowEnd + "]包含" + count + "条数据===>" + elements.toString());
 
 
                             }

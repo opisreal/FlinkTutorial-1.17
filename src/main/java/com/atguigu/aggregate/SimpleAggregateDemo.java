@@ -21,9 +21,21 @@ public class SimpleAggregateDemo {
 
         DataStreamSource<WaterSensor> sensorDS = env.fromElements(
                 new WaterSensor("s1", 1L, 1),
-                new WaterSensor("s1", 11L, 11),
+                new WaterSensor("s1", 3L, 1),
+                new WaterSensor("s1", 11L, 3),
+                new WaterSensor("s1", 199L, 2),
+                new WaterSensor("s1", 119L, 7),
+                new WaterSensor("s1", 9L, 11),
+                new WaterSensor("s1", 18L, 22),
+                new WaterSensor("s1", 22L, 11),
+                new WaterSensor("s1", 28L, 11),
+                new WaterSensor("s1", 23L, 26),
                 new WaterSensor("s2", 2L, 2),
-                new WaterSensor("s3", 3L, 3)
+                new WaterSensor("s2", 24L, 5),
+                new WaterSensor("s2", 12L, 4),
+                new WaterSensor("s3", 134L, 32),
+                new WaterSensor("s3", 34L, 3),
+                new WaterSensor("s3", 343L, 95)
         );
 
 
@@ -50,7 +62,7 @@ public class SimpleAggregateDemo {
         /**
          *   max\maxby的区别： 同min
          *       max：只会取比较字段的最大值，非比较字段保留第一次的值
-         *       maxby：取比较字段的最大值，同时非比较字段 取 最大值这条数据的值
+         *       maxby：取比较字段的最大值，非比较字段取该最大值字段的完整记录
          */
 //        SingleOutputStreamOperator<WaterSensor> result = sensorKS.max("vc");
 //        SingleOutputStreamOperator<WaterSensor> result = sensorKS.min("vc");

@@ -60,7 +60,7 @@ public class SinkMySQL {
                 new JdbcConnectionOptions.JdbcConnectionOptionsBuilder()
                         .withUrl("jdbc:mysql://hadoop102:3306/test?serverTimezone=Asia/Shanghai&useUnicode=true&characterEncoding=UTF-8")
                         .withUsername("root")
-                        .withPassword("000000")
+                        .withPassword("darkfate")
                         .withConnectionCheckTimeoutSeconds(60) // 重试的超时时间
                         .build()
         );

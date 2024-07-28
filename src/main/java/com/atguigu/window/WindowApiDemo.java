@@ -33,12 +33,10 @@ public class WindowApiDemo {
         KeyedStream<WaterSensor, String> sensorKS = sensorDS.keyBy(sensor -> sensor.getId());
 
 
-
-
         // TODO 1. 指定 窗口分配器： 指定 用 哪一种窗口 ---  时间 or 计数？ 滚动、滑动、会话？
         // 1.1 没有keyby的窗口: 窗口内的 所有数据 进入同一个 子任务，并行度只能为1
-//        sensorDS.windowAll()
-        // 1.2 有keyby的窗口: 每个key上都定义了一组窗口，各自独立地进行统计计算
+        //sensorDS.windowAll()
+        //1.2 有keyby的窗口: 每个key上都定义了一组窗口，各自独立地进行统计计算
 
         // 基于时间的
 //        sensorKS.window(TumblingProcessingTimeWindows.of(Time.seconds(10))) // 滚动窗口，窗口长度10s
@@ -46,8 +44,8 @@ public class WindowApiDemo {
 //        sensorKS.window(ProcessingTimeSessionWindows.withGap(Time.seconds(5))) // 会话窗口，超时间隔5s
 
         // 基于计数的
-//        sensorKS.countWindow(5)  // 滚动窗口，窗口长度=5个元素
-//        sensorKS.countWindow(5,2) // 滑动窗口，窗口长度=5个元素，滑动步长=2个元素
+        //sensorKS.countWindow(5);  // 滚动窗口，窗口长度=5个元素
+//        sensorKS.countWindow(5,2) // 滑动窗口，窗口长度=5个元素，滑动 步长=2个元素
 //        sensorKS.window(GlobalWindows.create())  // 全局窗口，计数窗口的底层就是用的这个，需要自定义的时候才会用
 
         // TODO 2. 指定 窗口函数 ： 窗口内数据的 计算逻辑

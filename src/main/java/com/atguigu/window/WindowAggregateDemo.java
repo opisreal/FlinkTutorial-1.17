@@ -66,7 +66,7 @@ public class WindowAggregateDemo {
                      */
                     @Override
                     public Integer add(WaterSensor value, Integer accumulator) {
-                        System.out.println("调用add方法,value="+value);
+                        System.out.println("调用add方法,value=" + value);
                         return accumulator + value.getVc();
                     }
 
